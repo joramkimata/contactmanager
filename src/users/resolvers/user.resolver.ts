@@ -23,6 +23,12 @@ export class UserResolver {
 
     @Query(returns => User)
     @UseGuards(GqlAuthGuard)
+    @HasPermission({
+        name: "VIEW_USER_INFO",
+        displayName: "View User Info",
+        desciption: "View User Info",
+        groupName: GroupName.UAA,
+    })
     getCurrentUserInfo(
         @GetGraphqlUser()
         user: User

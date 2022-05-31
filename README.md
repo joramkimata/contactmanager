@@ -1,9 +1,11 @@
-# Administrator
+## Login as Admin
 
 ```
-username: admin@graphql.org
-```
+POST: https://contactmanager-udemy.herokuapp.com/auth/login
 
-```
-password: admin.2021
+Payload:
+{
+    "username": "admin",
+    "password": "admin.2021"
+}
 ```

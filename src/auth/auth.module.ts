@@ -16,7 +16,7 @@ import { PermissionGuard } from './guards/permission.guard';
         JwtModule.register({
             secret: 'qwert.2021',
             signOptions: {
-                expiresIn: '2min'
+                expiresIn: '10min'
             }
         }),
         TypeOrmModule.forFeature([

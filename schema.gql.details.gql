@@ -1,0 +1,31 @@
+# Objects
+
+type ContactType {
+    id: ID!
+    phoneNumber: String!
+    isPublic: Boolean!
+}
+
+# Query
+
+type Query {
+    getPublicContacts: [Contact]
+}
+
+# Mutation
+
+# 1st Method - works well if you have less input fields
+
+type Mutation {
+    createContact(phoneNumber: String!): Contact
+}
+
+# 2nd Method - works well if you have many input fields
+
+input ContactInput {
+    phoneNumber: String!
+}
+
+type Mutation {
+  createContact(input: ContactInput!): Contact
+}

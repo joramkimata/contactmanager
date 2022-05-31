@@ -17,15 +17,6 @@ export class ContactResolver {
 
     constructor(private contactService: ContactService) { }
 
-    @Query(returns => User)
-    @UseGuards(GqlAuthGuard)
-    getCurrentUserInfo(
-        @GetGraphqlUser()
-        user: User
-    ) {
-        return user;
-    }
-
 
     // GetPublicContacts
     @Query(returns => [Contact])

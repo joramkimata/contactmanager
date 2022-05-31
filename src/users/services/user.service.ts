@@ -17,6 +17,7 @@ import { Role } from '../entities/role.entity';
 @Injectable()
 export class UserService {
 
+
     private logger: Logger = new Logger("USER SERVICE");
 
     constructor(
@@ -28,6 +29,16 @@ export class UserService {
         private permRepository: Repository<Permission>
     ) {
 
+    }
+
+    async getCurrentUserInfo(user: User) {
+        return this.userRepository.findOne({
+            where: {
+                deleted: false,
+                id: user.id
+            },
+            relations: ['roles']
+        })
     }
 
     async seedAdmin() {

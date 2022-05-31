@@ -9,6 +9,7 @@ import { UserInput } from "../inputs/user.input";
 import { UserService } from "../services/user.service";
 import { AssignRolesInput } from '../inputs/assign-roles.input';
 import { UseGuards } from '@nestjs/common';
+import { GetGraphqlUser } from 'src/auth/decorators/get-user-graphql.decorator';
 
 
 @Resolver(of => User)
@@ -18,6 +19,16 @@ export class UserResolver {
     constructor(
         private userService: UserService
     ) { }
+
+
+    @Query(returns => User)
+    @UseGuards(GqlAuthGuard)
+    getCurrentUserInfo(
+        @GetGraphqlUser()
+        user: User
+    ) {
+        return this.userService.getCurrentUserInfo(user);
+    }
 
     @Mutation(returns => User)
     @HasPermission({

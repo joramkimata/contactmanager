@@ -6,5 +6,8 @@
   "password": "80ec07473d63cbb191d5c349be26bd2c810eade8488d313476d309ec088db9c6",
   "database": "d4hn3j0113md3q",
   "entities": ["dist/**/*.entity{.ts,.js}"],
-  "synchronize": true
+  "synchronize": true,
+  "ssl": {
+    "rejectUnauthorized": false
+  }
 }

@@ -18,6 +18,8 @@ import { ConfigModule } from '@nestjs/config';
     GraphQLModule.forRoot({
       autoSchemaFile: true,
       installSubscriptionHandlers: true,
+      introspection: true,
+      playground: true
     }),
     ContactsModule,
     UsersModule,

@@ -37,7 +37,7 @@ export class UserService {
                 deleted: false,
                 id: user.id
             },
-            relations: ['roles']
+            relations: ['roles', 'roles.permissions']
         })
     }
 

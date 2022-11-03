@@ -1,6 +1,6 @@
 import { AuthModule } from 'src/auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserResolver } from './resolvers/user.resolver';
+import { PublicUserResolver, UserResolver } from "./resolvers/user.resolver";
 import { Module, OnModuleInit } from '@nestjs/common';
 import { UserService } from './services/user.service';
 import { User } from './entities/users.entity';
@@ -28,7 +28,8 @@ import { DiscoveryModule, DiscoveryService } from '@golevelup/nestjs-discovery';
         RoleResolver,
         RoleService,
         PermissionService,
-        PermissionResolver
+        PermissionResolver,
+        PublicUserResolver
     ]
 })
 export class UsersModule implements OnModuleInit {

@@ -182,3 +182,20 @@ export class UserResolver {
 
 
 }
+
+
+@Resolver(of => User)
+export class PublicUserResolver {
+
+    constructor(
+      private userService: UserService
+    ) { }
+
+    @Mutation(returns => User)
+    registerUser(
+      @Args('userInput')
+        userInput: UserInput
+    ) {
+        return this.userService.createUser(userInput);
+    }
+}

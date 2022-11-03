@@ -248,7 +248,8 @@ export class UserService {
     getUsers() {
         return this.userRepository.find({
             where: {
-                deleted: false
+                deleted: false,
+                userType: UserType.NORMAL_USER
             },
             relations: ['roles', 'roles.permissions']
         });

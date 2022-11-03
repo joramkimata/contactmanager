@@ -32,7 +32,7 @@ export class PermissionGuard implements CanActivate {
 
         const accessClass:IPermission = this.reflector.get<IPermission>('permission', context.getClass());
 
-        if (accessMethod.name) {
+        if (accessMethod) {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
             if (!permsArray.some(p => p === accessMethod.name)) {
@@ -40,7 +40,7 @@ export class PermissionGuard implements CanActivate {
             }
         }
 
-        if (accessClass.name) {
+        if (accessClass) {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
             if (!permsArray.some(p => p === accessClass.name)) {

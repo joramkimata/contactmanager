@@ -35,7 +35,7 @@ export class PermissionGuard implements CanActivate {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
             if (!permsArray.some(p => p === accessMethod)) {
-                throw new ForbiddenException('Access Denied');
+                throw new ForbiddenException('Access Denied - Method' + accessMethod);
             }
         }
 
@@ -43,7 +43,7 @@ export class PermissionGuard implements CanActivate {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
             if (!permsArray.some(p => p === accessClass)) {
-                throw new ForbiddenException('Access Denied');
+                throw new ForbiddenException('Access Denied - Class' + accessClass);
             }
         }
 

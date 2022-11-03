@@ -60,7 +60,7 @@ export class UserService {
             user.password = await hashing('admin.2021');
 
             const dbRole = await this.roleRepository.findOne({
-                name: 'ADMIN5',
+                name: 'ADMIN',
                 deleted: false
             });
 

@@ -6,6 +6,7 @@ import { Reflector } from "@nestjs/core";
 import { GqlExecutionContext } from "@nestjs/graphql";
 import { Observable } from "rxjs";
 import { AuthService } from "../services/auth.service";
+import { IPermission } from "../../users/decorators/has-permission.decorator";
 
 
 @Injectable()
@@ -27,27 +28,23 @@ export class PermissionGuard implements CanActivate {
             throw new UnauthorizedException('Invalid User');
         }
 
-        const accessMethod = this.reflector.get<string>('permission', context.getHandler());
+        const accessMethod: IPermission = this.reflector.get<IPermission>('permission', context.getHandler());
 
-        console.log(accessMethod)
+        const accessClass:IPermission = this.reflector.get<IPermission>('permission', context.getClass());
 
-        const accessClass = this.reflector.get<string>('permission', context.getClass());
-
-        console.log(accessClass)
-
-        if (accessMethod) {
+        if (accessMethod.name) {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
-            if (!permsArray.some(p => p === accessMethod)) {
-                throw new ForbiddenException('Access Denied - Method' + accessMethod);
+            if (!permsArray.some(p => p === accessMethod.name)) {
+                throw new ForbiddenException('Access Denied');
             }
         }
 
-        if (accessClass) {
+        if (accessClass.name) {
             const permsArray = await this.authService.getUserPermissions(user.username);
 
-            if (!permsArray.some(p => p === accessClass)) {
-                throw new ForbiddenException('Access Denied - Class' + accessClass);
+            if (!permsArray.some(p => p === accessClass.name)) {
+                throw new ForbiddenException('Access Denied');
             }
         }
 

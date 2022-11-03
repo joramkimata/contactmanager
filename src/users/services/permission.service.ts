@@ -36,13 +36,36 @@ export class PermissionService {
 
         const permissions = allPermissions.map((p) => p.meta);
 
-        permissions.concat(permissionsx).forEach((p) => {
-            const permission = new Permission();
-            permission.displayName = p.displayName;
-            permission.name = p.name;
-            permission.groupName = p.groupName;
-            this.permissionRepository.save(permission).catch((err) => null);
-        });
+        // permissions.concat(permissionsx).forEach((p) => {
+        //     const permission = new Permission();
+        //     permission.displayName = p.displayName;
+        //     permission.name = p.name;
+        //     permission.groupName = p.groupName;
+        //     this.permissionRepository.save(permission).catch((err) => null);
+        // });
+
+        ///------------------
+
+        const newPermissions = [];
+
+        for (const p of permissions.concat(permissionsx)) {
+            const dbPermission = await this.permissionRepository.findOne({
+                name: p.name,
+                deleted: false
+            });
+
+            if (dbPermission == null) {
+                const permission = new Permission();
+                permission.displayName = p.displayName;
+                permission.name = p.name;
+                permission.groupName = p.groupName;
+                await this.permissionRepository.save(permission);
+                newPermissions.push(permission);
+            }
+        }
+
+
+        this.logger.debug(`**** Permissions ${newPermissions.length} seeded ****`);
 
 
         // const permissions = []

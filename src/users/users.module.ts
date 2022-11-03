@@ -38,8 +38,8 @@ export class UsersModule implements OnModuleInit {
         private userService: UserService,
         private discoveryService: DiscoveryService) { }
 
-    onModuleInit() {
-        this.permissionService.seedPermissions(this.discoveryService);
-        this.userService.seedAdmin();
+    async onModuleInit() {
+        await this.permissionService.seedPermissions(this.discoveryService);
+        await this.userService.seedAdmin();
     }
 }

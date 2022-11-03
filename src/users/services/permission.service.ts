@@ -1,6 +1,6 @@
 import { IPermission } from './../decorators/has-permission.decorator';
 import { DiscoveryService } from "@golevelup/nestjs-discovery";
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Permission } from "../entities/permission.entity";
@@ -10,6 +10,8 @@ import { GroupName } from '../enums/permission-group.enum';
 
 @Injectable()
 export class PermissionService {
+
+    private logger = new Logger(PermissionService.name);
 
 
     constructor(

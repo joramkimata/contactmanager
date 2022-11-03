@@ -29,7 +29,11 @@ export class PermissionGuard implements CanActivate {
 
         const accessMethod = this.reflector.get<string>('permission', context.getHandler());
 
+        console.log(accessMethod)
+
         const accessClass = this.reflector.get<string>('permission', context.getClass());
+
+        console.log(accessClass)
 
         if (accessMethod) {
             const permsArray = await this.authService.getUserPermissions(user.username);

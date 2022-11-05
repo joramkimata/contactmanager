@@ -24,6 +24,9 @@ export class Permission extends BaseEntity {
     @Field()
     groupName: GroupName;
 
+    @Field({ nullable: true })
+    belongToThisRole: Boolean;
+
 
 
 

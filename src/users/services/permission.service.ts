@@ -5,6 +5,8 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Permission } from "../entities/permission.entity";
 import { GroupName } from '../enums/permission-group.enum';
+import { Role } from "../entities/role.entity";
+import { GroupedByPermissionGroupNameDto } from "../dtos/grouped-by-permission-group-name.dto";
 
 
 
@@ -16,7 +18,9 @@ export class PermissionService {
 
     constructor(
         @InjectRepository(Permission)
-        private permissionRepository: Repository<Permission>
+        private permissionRepository: Repository<Permission>,
+        @InjectRepository(Role)
+        private roleRepo: Repository<Role>
     ) { }
 
     getPermissions() {
@@ -90,5 +94,45 @@ export class PermissionService {
         // });
 
 
+    }
+
+    async getAllPermissionsGroupedByPermissionGroupName(roleUuid: string) {
+        const role = await this.roleRepo.findOne({
+            where: {
+                deleted: false,
+                uuid: roleUuid
+            },
+            relations: ['permissions']
+        });
+
+        if (!role) return [];
+
+        const permxUuids = role.permissions.map(p => p.uuid);
+
+
+        const all = Object.values(GroupName).map(async g => {
+            const dto = new GroupedByPermissionGroupNameDto();
+            dto.permissionGroupName = g;
+
+            const permissions = await this.permissionRepository.find({
+                deleted: false,
+                groupName: g
+            });
+
+            dto.permissions = permissions.map(p => {
+
+                if (permxUuids.includes(p.uuid)) {
+                    p.belongToThisRole = true;
+                } else {
+                    p.belongToThisRole = false;
+                }
+
+                return p;
+            });
+
+            return dto;
+        });
+
+        return Promise.all(all);
     }
 }

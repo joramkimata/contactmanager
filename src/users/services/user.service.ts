@@ -307,4 +307,7 @@ export class UserService {
     }
 
 
+    changeLoggedInUserPassword(password: string, confirmPassword: string) {
+        
+    }
 }

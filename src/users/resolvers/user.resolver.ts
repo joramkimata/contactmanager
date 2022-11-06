@@ -168,6 +168,18 @@ export class UserResolver {
   }
 
   @Mutation(returns => User)
+  changeLoggedInUserPassword(
+    @Args("password")
+      password: string,
+    @Args("confirmPassword")
+      confirmPassword: string,
+    @GetGraphqlUser()
+      user: User
+  ) {
+    return this.userService.changeUserPassword(user.uuid, password, confirmPassword);
+  }
+
+  @Mutation(returns => User)
   @HasPermission({
     name: "ASSIGN_USER_ROLES",
     displayName: "Assign User Roles",

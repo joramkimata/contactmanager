@@ -260,7 +260,8 @@ export class UserService {
             where: {
                 uuid,
                 deleted: false
-            }
+            },
+            relations: ['roles', 'roles.permissions']
         });
 
         if (!dbUser) {

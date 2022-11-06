@@ -124,7 +124,8 @@ export class AuthService {
 
         return {
             access_token: this.jwtService.sign(payload),
-            refresh_token: myRefreshToken
+            refresh_token: myRefreshToken,
+            permissions: await this.getUserPermissions(dbUser.username)
         };
     }
 

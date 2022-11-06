@@ -116,7 +116,13 @@ export class ContactResolver {
     }
 
     @Query(returns => [Contact])
-    @UseGuards(GqlAuthGuard)
+    @UseGuards(GqlAuthGuard, PermissionGuard)
+    @HasPermission({
+        name: "MY_CONTACTS",
+        displayName: "View My Contacts",
+        desciption: "View My Contacts",
+        groupName: GroupName.CONTACTS,
+    })
     getMyContacts(
         @GetGraphqlUser()
         user: User

@@ -12,6 +12,7 @@ export class Contact extends BaseEntity {
     @Column({ name: 'phone_number' })
     phoneNumber: string;
 
+    @Field()
     @Column({ name: 'is_public', default: false })
     isPublic: boolean = false;
 

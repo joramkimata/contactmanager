@@ -104,7 +104,10 @@ export class ContactService {
 
     getAllContacts() {
         return this.contactRepository.find({
-            deleted: false
+            where: {
+                deleted: false,
+            },
+            relations: ['user']
         });
     }
 

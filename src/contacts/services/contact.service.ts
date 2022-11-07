@@ -26,8 +26,11 @@ export class ContactService {
 
     getPublicContacts() {
         return this.contactRepository.find({
-            deleted: false,
-            isPublic: true
+            where: {
+                deleted: false,
+                isPublic: true
+            },
+            relations: ['user']
         });
     }
 

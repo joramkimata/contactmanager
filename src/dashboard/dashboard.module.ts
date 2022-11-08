@@ -1,4 +1,16 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
+import { DashboardService } from "./services/dashboard.service";
+import { DashboardResolver } from "./resolvers/dashboard.resolver";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { User } from "../users/entities/users.entity";
 
-@Module({})
-export class DashboardModule {}
+@Module({
+  providers: [DashboardService, DashboardResolver],
+  imports: [
+    TypeOrmModule.forFeature([
+      User
+    ])
+  ]
+})
+export class DashboardModule {
+}

@@ -31,7 +31,6 @@ import { DashboardResolver } from "../dashboard/resolvers/dashboard.resolver";
     PermissionService,
     PermissionResolver,
     PublicUserResolver,
-    DashboardResolver
   ]
 })
 export class UsersModule implements OnModuleInit {

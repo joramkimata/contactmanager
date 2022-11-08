@@ -31,4 +31,37 @@ export class DashboardResolver {
     return this.dashboardService.getNewUsers();
   }
 
+  @HasPermission({
+    name: "VIEW_ALL_CONTACTS",
+    displayName: "View All Contacts",
+    desciption: "View All Contacts",
+    groupName: GroupName.DASHBOARD,
+  })
+  @Query(returns => Number)
+  getAllContacts() {
+    return this.dashboardService.getAllContacts();
+  }
+
+  @HasPermission({
+    name: "VIEW_PRIVATE_CONTACTS",
+    displayName: "View Private Contacts",
+    desciption: "View Private Contacts",
+    groupName: GroupName.DASHBOARD,
+  })
+  @Query(returns => Number)
+  getPrivateContacts() {
+    return this.dashboardService.getPrivateContacts();
+  }
+
+  @HasPermission({
+    name: "VIEW_PUBLIC_CONTACTS",
+    displayName: "View Public Contacts",
+    desciption: "View Public Contacts",
+    groupName: GroupName.DASHBOARD,
+  })
+  @Query(returns => Number)
+  getPublicContacts() {
+    return this.dashboardService.getPublicContacts();
+  }
+
 }

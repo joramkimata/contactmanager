@@ -58,4 +58,28 @@ export class DashboardService {
 
     return contacts.length
   }
+
+  async getMyDashPublicContacts(user: User) {
+    const contacts = await this.contactRepo.find({
+      where: {
+        deleted: false,
+        isPublic: true,
+        user
+      }
+    });
+
+    return contacts.length
+  }
+
+  async getMyDashPrivateContacts(user: User) {
+    const contacts = await this.contactRepo.find({
+      where: {
+        deleted: false,
+        isPublic: false,
+        user
+      }
+    });
+
+    return contacts.length
+  }
 }

@@ -6,6 +6,8 @@ import { PermissionGuard } from "../../auth/guards/permission.guard";
 import { HasPermission } from "../../users/decorators/has-permission.decorator";
 import { GroupName } from "../../users/enums/permission-group.enum";
 import { DashboardService } from "../services/dashboard.service";
+import { GetGraphqlUser } from "../../auth/decorators/get-user-graphql.decorator";
+import { User } from "../../users/entities/users.entity";
 
 @Resolver(of => DashboardDto)
 @UseGuards(GqlAuthGuard, PermissionGuard)
@@ -62,6 +64,34 @@ export class DashboardResolver {
   @Query(returns => Number)
   getDashPublicContacts() {
     return this.dashboardService.getPublicContacts();
+  }
+
+  @HasPermission({
+    name: "VIEW_MY_PUBLIC_CONTACTS",
+    displayName: "View My Public Contacts",
+    desciption: "View My Public Contacts",
+    groupName: GroupName.DASHBOARD,
+  })
+  @Query(returns => Number)
+  getMyDashPublicContacts(
+    @GetGraphqlUser()
+    user: User
+  ) {
+    return this.dashboardService.getMyDashPublicContacts(user);
+  }
+
+  @HasPermission({
+    name: "VIEW_MY_PRIVATE_CONTACTS",
+    displayName: "View My Private Contacts",
+    desciption: "View My Private Contacts",
+    groupName: GroupName.DASHBOARD,
+  })
+  @Query(returns => Number)
+  getMyDashPrivateContacts(
+    @GetGraphqlUser()
+      user: User
+  ) {
+    return this.dashboardService.getMyDashPrivateContacts(user);
   }
 
 }

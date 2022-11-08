@@ -38,7 +38,7 @@ export class DashboardResolver {
     groupName: GroupName.DASHBOARD,
   })
   @Query(returns => Number)
-  getAllContacts() {
+  getDashAllContacts() {
     return this.dashboardService.getAllContacts();
   }
 
@@ -49,7 +49,7 @@ export class DashboardResolver {
     groupName: GroupName.DASHBOARD,
   })
   @Query(returns => Number)
-  getPrivateContacts() {
+  getDashPrivateContacts() {
     return this.dashboardService.getPrivateContacts();
   }
 
@@ -60,7 +60,7 @@ export class DashboardResolver {
     groupName: GroupName.DASHBOARD,
   })
   @Query(returns => Number)
-  getPublicContacts() {
+  getDashPublicContacts() {
     return this.dashboardService.getPublicContacts();
   }
 

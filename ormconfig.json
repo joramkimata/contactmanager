@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "dpg-ceca6rsgqg4ap4bh71ug-a",
-  "port": 5432,
-  "username": "contactmanager_user\n\n",
-  "password": "XhKH4CrDKCLUZ9yPmMqmdhvGSIgi3UES",
-  "database": "contactmanager_db",
+  "host": "containers-us-west-101.railway.app",
+  "port": 7997,
+  "username": "postgres",
+  "password": "R4gpkyVCg81Vs9BHMhGG",
+  "database": "railway",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true,
   "ssl": {

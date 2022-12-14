@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "host": "ec2-3-211-221-185.compute-1.amazonaws.com",
+  "host": "dpg-ceca6rsgqg4ap4bh71ug-a",
   "port": 5432,
-  "username": "jhkhlctvodhpep",
-  "password": "80ec07473d63cbb191d5c349be26bd2c810eade8488d313476d309ec088db9c6",
-  "database": "d4hn3j0113md3q",
+  "username": "contactmanager_user\n\n",
+  "password": "XhKH4CrDKCLUZ9yPmMqmdhvGSIgi3UES",
+  "database": "contactmanager_db",
   "entities": ["dist/**/*.entity{.ts,.js}"],
   "synchronize": true,
   "ssl": {
